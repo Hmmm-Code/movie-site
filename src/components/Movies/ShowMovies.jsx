@@ -1,8 +1,5 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { Link } from "react-router-dom";
+import Rating from "./Rating";
 
 export default function ShowMovies({ data }) {
   const { Poster, Title, Year } = data;
@@ -14,8 +11,20 @@ export default function ShowMovies({ data }) {
         </div>
       </div>
       <div className="movie__content">
-        <div className="movie--title">{Title}</div>
-        <div className="movie--date">Release data: {Year}</div>
+        <div className="rating">
+          <div className="movie--rating">
+            <div className="movie--score">
+              <div className="user--rating">
+                <Rating value={75} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 className="movie--title">
+          <Link to="./">{Title}</Link>
+        </h2>
+
+        <div className="movie--date">{Year}</div>
       </div>
     </div>
   );
