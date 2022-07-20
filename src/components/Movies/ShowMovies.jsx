@@ -5,25 +5,18 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 export default function ShowMovies({ data }) {
-  const data1 = data.Search;
+  const { Poster, Title, Year } = data;
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={data1.Poster}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {data1.Title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Release data: {data1.Year}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <div className="movie--card">
+      <div className="image">
+        <div className="image--wraper">
+          <img className="movie--img" src={Poster} alt="movie poster" />
+        </div>
+      </div>
+      <div className="movie__content">
+        <div className="movie--title">{Title}</div>
+        <div className="movie--date">Release data: {Year}</div>
+      </div>
+    </div>
   );
 }

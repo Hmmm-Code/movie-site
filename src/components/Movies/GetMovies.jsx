@@ -7,32 +7,41 @@ const GetMovies = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getManga = async () => {
+    const getMovies = async () => {
       const movies = await axios.get(
         `https://fake-movie-database-api.herokuapp.com/api?s=batman`
       );
       const moviesData = await movies.data.Search;
       setMovies(moviesData);
+      setLoading(false);
     };
 
-    getManga();
-    setLoading(false);
-    console.log(movies);
+    getMovies();
   }, [movies]);
   return loading ? (
     "Loading"
   ) : (
     <>
-      <div className="movies">
-        <h3 className="title">What's Popular</h3>
-        <button className="btn btn--primary">Batman Movies</button>
-        <button className="btn btn--primary">Star Wars Movies</button>
-      </div>
-      <div className="container">
-        {movies.map((data) => (
-          <ShowManga data={data} />
-        ))}
-      </div>
+      <section className="movies">
+        <div className="movie--wraper">
+          <div className="movie--content">
+            <div className="movie--column">
+              <div className="header">
+                <h3 className="title">What's Popular</h3>
+                <button className="btn btn--primary">Batman Movies</button>
+                <button className="btn btn--primary">Star Wars Movies</button>
+              </div>
+              <div className="container">
+                <div className="movie--container">
+                  {movies.map((data) => (
+                    <ShowManga data={data} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
