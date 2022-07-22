@@ -1,26 +1,39 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ShowManga from "../Movies/ShowMovies";
+import BottomNavigation from "../navigation/BottomNavigation";
 
 const GetMovies = () => {
+  const [allMovies, setAllMovies] = useState();
   const [movies, setMovies] = useState();
   const [loading, setLoading] = useState(true);
-
+  let [increament, setIncreament] = useState(28);
   useEffect(() => {
     const getMovies = async () => {
       const movies = await axios.get(
-        `https://fake-movie-database-api.herokuapp.com/api?s=batman`
+        `https://www.fakerestapi.com/datasets/api/v1/movie-details-dataset.json`
       );
-      const moviesData = await movies.data.Search;
-      setMovies(moviesData);
+      const moviesData = await movies.data.data;
+      const movieData = moviesData.slice(0, 18);
+      setAllMovies(moviesData);
+
+      setMovies(movieData);
       setLoading(false);
     };
 
     getMovies();
-  }, [movies]);
+  }, []);
+
+  const handleMore = () => {
+    const loadMore = allMovies.slice(0, increament);
+    setIncreament(increament + 10);
+    setMovies(loadMore);
+  };
+
   return loading ? (
     "Loading"
   ) : (
+    // Loading component
     <>
       <section className="movies">
         <div className="movie--wraper">
@@ -28,16 +41,17 @@ const GetMovies = () => {
             <div className="movie--column">
               <div className="header">
                 <h3 className="title">What's Popular</h3>
-                <button className="btn btn--primary">Batman Movies</button>
-                <button className="btn btn--primary">Star Wars Movies</button>
               </div>
               <div className="container">
-                <div className="movie--container">
-                  {movies.map((data) => (
-                    <ShowManga data={data} />
-                  ))}
+                <div className="inline--container">
+                  <div className="movie--container">
+                    {movies.map((data) => (
+                      <ShowManga data={data} />
+                    ))}
+                  </div>
                 </div>
               </div>
+              <BottomNavigation handleMore={handleMore} />
             </div>
           </div>
         </div>

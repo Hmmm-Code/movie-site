@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
 export default function ShowMovies({ data }) {
-  const { Poster, Title, Year } = data;
+  const { poster, title, crawled_at } = data;
+  const releaseDate = crawled_at.slice(0, 10);
+
   return (
     <div className="movie--card">
       <div className="image">
         <div className="image--wraper">
-          <img className="movie--img" src={Poster} alt="movie poster" />
+          <img className="movie--img" src={poster} alt="movie poster" />
         </div>
       </div>
       <div className="movie__content">
@@ -21,10 +23,10 @@ export default function ShowMovies({ data }) {
           </div>
         </div>
         <h2 className="movie--title">
-          <Link to="./">{Title}</Link>
+          <Link to="./">{title}</Link>
         </h2>
 
-        <div className="movie--date">{Year}</div>
+        <div className="movie--date">{releaseDate}</div>
       </div>
     </div>
   );
