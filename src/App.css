@@ -403,3 +403,7 @@ a {
   -o-transition: padding 0.2s ease-out;
   transition: padding 0.2s ease-out;
 }
+
+.menu--icon {
+  font-size: 3rem;
+}

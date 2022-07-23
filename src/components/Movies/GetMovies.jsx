@@ -7,7 +7,7 @@ const GetMovies = () => {
   const [allMovies, setAllMovies] = useState();
   const [movies, setMovies] = useState();
   const [loading, setLoading] = useState(true);
-  let [increament, setIncreament] = useState(28);
+  let [increament, setIncreament] = useState(30);
   useEffect(() => {
     const getMovies = async () => {
       const movies = await axios.get(
@@ -26,7 +26,7 @@ const GetMovies = () => {
 
   const handleMore = () => {
     const loadMore = allMovies.slice(0, increament);
-    setIncreament(increament + 10);
+    setIncreament(increament + 12);
     setMovies(loadMore);
   };
 
